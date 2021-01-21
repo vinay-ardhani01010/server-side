@@ -3,6 +3,7 @@ const app = express();
 var mongoose = require('mongoose');
 const url = "mongodb+srv://new_user:pragati456@cluster0.xxmjo.mongodb.net/node-mongo?retryWrites=true&w=majority";
 const Users = require('./models/Users.js');
+const Products = require('./models/Products.js');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
 
@@ -46,11 +47,40 @@ app.post('/login', async (req,res)=>{
     }
     
 })
+
 app.get('/show',(req,res)=>{
     Users.find({})
     .then((list)=>{
         res.json(list);
     })
+})
+// PRODUCT ROUTES
+
+app.get('/addproduct',(req,res)=>{
+    res.render('Add.ejs');
+})
+
+app.get('/showItems',(req,res)=>{
+    Products.find({})
+    .then((array)=>{
+        res.json(array);
+    })
+})
+
+app.post('/add',(req,res) =>{
+    console.log(req.body);
+    const item_name = req.body.name;
+    const price = req.body.price;
+    const delivery_time = req.body.time;
+    const description = req.body.description;
+    const category = req.body.category;
+    const image_url = req.body.imgUrl;
+
+    Products.create({item_name:item_name,price:price,delivery_time:delivery_time,description:description,
+        category:category,image_url:image_url
+    });
+    res.json('Item Added Sucessfully');
+
 })
 //CONNECT TO DB
 
