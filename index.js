@@ -50,6 +50,7 @@ app.post('/login', async (req,res)=>{
 
 app.get('/show',(req,res)=>{
     Users.find({})
+    
     .then((list)=>{
         res.json(list);
     })
