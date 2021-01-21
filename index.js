@@ -31,10 +31,10 @@ app.post('/signup',(req,res)=>{
 app.post('/login', async (req,res)=>{
     const empid = req.body.empid;
     const password = req.body.password;
+    console.log('recieved object = ');
     console.log(req.body);
     const user = await Users.findOne({empid:empid})
     if(user){
-        console.log(user.password);
         if(user.password == password){
             res.json(user._id);
         }
