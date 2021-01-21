@@ -34,6 +34,7 @@ app.post('/login', async (req,res)=>{
     console.log('recieved object = ');
     console.log(req.body);
     const user = await Users.findOne({empid:empid})
+    console.log(user);
     if(user){
         if(user.password == password){
             res.json(user._id);
