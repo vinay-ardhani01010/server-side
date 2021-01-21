@@ -32,7 +32,7 @@ app.post('/login', async (req,res)=>{
     const empid = req.body.empid;
     const password = req.body.password;
     console.log('recieved object = ');
-    console.log(req.body);
+    console.log(req.body.empid);
     const user = await Users.findOne({empid:empid})
     console.log(user);
     if(user){
