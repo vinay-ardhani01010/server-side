@@ -1,9 +1,10 @@
 {
-  "name": "gar_dek",
+  "name": "server-code",
   "version": "1.0.0",
   "description": "A web app used to find the house",
   "main": "index.js",
   "scripts": {
+    "start" : "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "vinay",
