@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: false}));
 app.set('view engine','ejs');
 
 //ROUTES
-
 app.get("/",(req,res)=>{
     res.render('AddUser.ejs');
 })
@@ -62,6 +61,6 @@ connect.then(()=>{
 
 //SERVER
 
-app.listen(3000,()=>{
-    console.log('server is listening at the port 3000');
-})
+app.listen(process.env.PORT || 3000,()=>{
+    console.log('server started');
+ })
