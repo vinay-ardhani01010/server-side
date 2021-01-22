@@ -40,7 +40,9 @@ app.post('/signup',(req,res)=>{
         mobile : mobile,
         password : password,
         id_card : id_card    
-    });
+    })
+    .then(() => res.send("Employee Registered Sucessfully"))
+    .catch(err => res.status(400).json('Error: '+ err));
 })
 
 app.post('/login', async (req,res)=>{
@@ -95,18 +97,19 @@ app.post('/add',(req,res) =>{
 
     Products.create({item_name:item_name,price:price,delivery_time:delivery_time,description:description,
         category:category,image_url:image_url
-    });
-    res.json('Item Added Sucessfully');
-
+    })
+    .then(() => res.send("Item Added Sucessfully"))
+    .catch(err => res.status(400).json('Error: '+ err));
 })
-//CONNECT TO DB
+
+//CONNECT TO DATA_BASE
 
 const connect = mongoose.connect(url);
 connect.then(()=>{
     console.log('connected to database');
 })
 
-//SERVER
+//SERVER ON https://back-code.herokuapp.com
 
 app.listen(process.env.PORT || 3000,()=>{
     console.log('server started');
