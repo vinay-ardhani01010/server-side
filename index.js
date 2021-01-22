@@ -6,11 +6,13 @@ const Users = require('./models/Users.js');
 const Products = require('./models/Products.js');
 const ejs = require('ejs');
 const bodyParser = require('body-parser');
+var orders = require('./routes/orders.js');
 
 //MIDDLE WARE
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false}));
 app.set('view engine','ejs');
+app.use('/orders',orders);
 
 //ROUTES
 app.get("/",(req,res)=>{
@@ -95,11 +97,24 @@ app.post('/add',(req,res) =>{
     const category = req.body.category;
     const image_url = req.body.imgUrl;
 
-    Products.create({item_name:item_name,price:price,delivery_time:delivery_time,description:description,
-        category:category,image_url:image_url
+    Products.create({
+        item_name : item_name,
+        price : price,
+        delivery_time : delivery_time,
+        description : description,
+        category:category,
+        image_url:image_url
     })
     .then(() => res.json("Item Added Sucessfully"))
     .catch(err => res.status(400).json('Error: '+ err));
+});
+
+app.delete('/showItems',(req,res)=>{
+    Products.remove({})
+    .then(()=>{
+        console.log('All Items Are Removed');
+    })
+    .catch((err)=> res.status(400).json('Error :'+ err));
 })
 
 
