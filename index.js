@@ -22,6 +22,8 @@ app.get("/login",(req,res)=>{
 })
 
 app.post('/signup',(req,res)=>{
+    console.log('sign_up object = ');
+    console.log(req.body);
     var empid = req.body.empid;
     var email = req.body.email;
     const password = req.body.password;
