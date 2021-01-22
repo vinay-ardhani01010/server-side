@@ -30,13 +30,15 @@ const UserSchema = new Schema({
         required : true
     },
     orders:{
-        type : [String],
-        default : []
+        type : [Object],
+        default : [],
+        
     },
     created_at :{
         type : Date,
         default : Date
     }
-})
+});
+
 const Users = mongoose.model('users',UserSchema);
 module.exports  = Users;

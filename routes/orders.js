@@ -1,7 +1,43 @@
 const express = require('express');
 const router = express.Router();
+const Users  = require('../models/Users.js');
+const Orders = require('../models/ordersRecieved.js')
 router
-     .get('/sample',(req,res)=>{
-         res.json("using router module");
+     .post("/userOrders", async (req,res)=>{
+         const user_id = req.body.user_id;
+         const emp_id = req.body.emp_id;
+         var object = {
+             imgUrl : req.body.imgUrl,
+             item_name : req.body.item_name,
+             price: req.body.price,
+             count : req.body.count
+         }
+         //console.log(object);
+         var user = await  Users.findOne({_id : user_id});
+         if(user){
+             user.orders.push(object);
+             user.save();
+             console.log('user order added');
+         }
+         else{
+             res.status(400).json('Something went wrong while adding order..')
+         }
+         Orders.create({
+             emp_id : emp_id,
+             imgUrl: req.body.imgUrl,
+             item_name : req.body.item_name,
+             price : req.body.price 
+            })
+            .then(()=>res.json('Order sent'),console.log('Order sent'))
+            .catch((err)=> res.status(500).json('Error :'+err));
+         
      });
+router 
+      .get('/showOrders',(req,res)=>{
+          Orders.find({})
+          .then((array)=>{
+              res.json(array);
+          })
+          .catch((err)=> res.status(500).json('Error :'+ err));
+      })
 module.exports = router;

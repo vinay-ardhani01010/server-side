@@ -44,7 +44,7 @@ app.post('/signup',(req,res)=>{
         id_card : id_card    
     })
     .then(() => res.send("Employee Registered Sucessfully"))
-    .catch(err => res.status(400).json('Error: '+ err));
+    .catch(err => res.status(500).json('Error: '+ err));
 })
 
 app.post('/login', async (req,res)=>{
@@ -86,6 +86,7 @@ app.get('/showItems',(req,res)=>{
     .then((array)=>{
         res.json(array);
     })
+    .catch((err)=> res.status(500).json('Error :'+ err));
 })
 
 app.post('/add',(req,res) =>{
@@ -106,7 +107,7 @@ app.post('/add',(req,res) =>{
         image_url:image_url
     })
     .then(() => res.json("Item Added Sucessfully"))
-    .catch(err => res.status(400).json('Error: '+ err));
+    .catch(err => res.status(500).json('Error: '+ err));
 });
 
 app.delete('/showItems',(req,res)=>{
@@ -114,7 +115,7 @@ app.delete('/showItems',(req,res)=>{
     .then(()=>{
         console.log('All Items Are Removed');
     })
-    .catch((err)=> res.status(400).json('Error :'+ err));
+    .catch((err)=> res.status(500).json('Error :'+ err));
 })
 
 
