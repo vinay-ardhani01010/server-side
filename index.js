@@ -98,9 +98,10 @@ app.post('/add',(req,res) =>{
     Products.create({item_name:item_name,price:price,delivery_time:delivery_time,description:description,
         category:category,image_url:image_url
     })
-    .then(() => res.send("Item Added Sucessfully"))
+    .then(() => res.json("Item Added Sucessfully"))
     .catch(err => res.status(400).json('Error: '+ err));
 })
+
 
 //CONNECT TO DATA_BASE
 
