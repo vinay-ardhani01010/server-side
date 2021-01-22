@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 const UserSchema = new Schema({
+    emp_name:{
+        type : String,
+        required : true
+    },
+    org_name: {
+        type: String,
+        required : true
+    },
     empid:{
         type:String,
         required:true
@@ -9,9 +17,25 @@ const UserSchema = new Schema({
         type:String,
         required:true
     },
+    mobile:{
+        type : Number,
+        required : true
+    },
     password:{
        type:String,
        required:true 
+    },
+    id_card:{
+        type : String,
+        required : true
+    },
+    orders:{
+        type : [String],
+        default : []
+    },
+    created_at :{
+        type : Date,
+        default : Date
     }
 })
 const Users = mongoose.model('users',UserSchema);

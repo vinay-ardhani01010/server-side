@@ -23,9 +23,22 @@ app.get("/login",(req,res)=>{
 
 app.post('/signup',(req,res)=>{
     var empid = req.body.empid;
-    var Email = req.body.email;
+    var email = req.body.email;
     const password = req.body.password;
-    Users.create({empid:empid,email:Email,password:password});
+    const mobile = req.body.mobile;
+    const emp_name = req.body.emp_name;
+    const org_name = req.body.org_name;
+    const id_card = req.body.id_card;
+
+    Users.create({
+        emp_name : emp_name,
+        org_name : org_name,
+        empid : empid,
+        email : email,
+        mobile : mobile,
+        password : password,
+        id_card : id_card    
+    });
 })
 
 app.post('/login', async (req,res)=>{
@@ -34,8 +47,8 @@ app.post('/login', async (req,res)=>{
     console.log('recieved object = ');
     console.log(req.body.empid);
     const user = await Users.findOne({empid:empid})
-    console.log(user);
     if(user){
+        console.log(user.orders);
         if(user.password == password){
             res.json(user._id);
         }
