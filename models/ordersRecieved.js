@@ -18,7 +18,12 @@ var OrdersSchema = new Schema({
     price:{
         type : Number,
         required : true
+    },
+    count:{
+        type : Number,
+        required : true
     }
+
 });
 
 const ordersRecieved = mongoose.model('ordersRecieved',OrdersSchema);

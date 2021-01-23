@@ -5,7 +5,6 @@ const Orders = require('../models/ordersRecieved.js')
 router
      .post("/userOrders", async (req,res)=>{
          const user_id = req.body.user_id;
-         const emp_id = req.body.emp_id;
          var object = {
              imgUrl : req.body.imgUrl,
              item_name : req.body.item_name,
@@ -22,11 +21,13 @@ router
          else{
              res.status(400).json('Something went wrong while adding order..')
          }
+         const emp_id = user.empid;
          Orders.create({
              emp_id : emp_id,
              imgUrl: req.body.imgUrl,
              item_name : req.body.item_name,
-             price : req.body.price 
+             price : req.body.price,
+             count : req.body.count
             })
             .then(()=>res.json('Order sent'),console.log('Order sent'))
             .catch((err)=> res.status(500).json('Error :'+err));
