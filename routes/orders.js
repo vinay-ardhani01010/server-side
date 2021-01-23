@@ -32,14 +32,13 @@ router
             .then(()=>res.json('Order sent'),console.log('Order sent'))
             .catch((err)=> res.status(500).json('Error :'+err));
          })
-         .post('/ordersForUser',(req,res)=>{
+         .post('/ordersForUser', async (req,res)=>{
              console.log(req.body);
              const user_id = req.body.user_id;
-             Users.findOne({_id : user_id})
-             .then((user)=>{
-                 res.json(user.orders);
-             })
-             .catch((err)=> res.status(500).json('Error :'+ err));
+             const user = await Users.findOne({_id : user_id});
+            //console.log(user.orders);
+             res.json(user.orders);
+   
          })
 router 
       .get('/showOrders',(req,res)=>{
