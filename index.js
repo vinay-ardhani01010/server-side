@@ -67,13 +67,20 @@ app.post('/login', async (req,res)=>{
     }
     
 })
-
+// List of users
 app.get('/show',(req,res)=>{
     Users.find({})
     
     .then((list)=>{
         res.json(list);
     })
+});
+//Delete Users
+
+app.delete("/show",(req,res)=>{
+    Users.remove({})
+    .then(()=>res.status(200).json("Users deleted sucessfully"))
+    .catch((err)=> res.status(500).json("Errror :"+err));
 })
 // PRODUCT ROUTES
 
