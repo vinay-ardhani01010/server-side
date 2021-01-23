@@ -41,4 +41,10 @@ router
           })
           .catch((err)=> res.status(500).json('Error :'+ err));
       })
+      .delete('/showOrders',(req,res)=>{
+          Orders.remove({})
+          .then(()=> res.status(200).json('Deleted sucessfully'))
+          .catch((err)=> res.json(500).json('Error :'+err));
+
+      })
 module.exports = router;
