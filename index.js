@@ -90,7 +90,7 @@ app.get('/showItems',(req,res)=>{
 })
 
 app.post('/add',(req,res) =>{
-    console.log(req.body);
+    //console.log(req.body);
     const item_name = req.body.name;
     const price = req.body.price;
     const delivery_time = req.body.time;

@@ -31,8 +31,16 @@ router
             })
             .then(()=>res.json('Order sent'),console.log('Order sent'))
             .catch((err)=> res.status(500).json('Error :'+err));
-         
-     });
+         })
+         .post('/ordersForUser',(req,res)=>{
+             console.log(req.body);
+             const user_id = req.body.user_id;
+             Users.findOne({_id : user_id})
+             .then((user)=>{
+                 res.json(user.orders);
+             })
+             .catch((err)=> res.status(500).json('Error :'+ err));
+         })
 router 
       .get('/showOrders',(req,res)=>{
           Orders.find({})
