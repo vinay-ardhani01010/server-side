@@ -19,7 +19,7 @@ var ProductSchema = new Schema({
     },
     category:{
         type : Number,
-        default : 0
+        required : true
     },
     image_url:{
         type: String,
